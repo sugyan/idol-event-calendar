@@ -12,5 +12,9 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require twitter/bootstrap
 //= require turbolinks
-//= require_tree .
+//= require react
+//= require react_ujs
+//= require react-router
+//= require_tree ./application
