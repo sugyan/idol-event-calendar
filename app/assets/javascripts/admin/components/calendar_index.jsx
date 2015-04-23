@@ -100,7 +100,12 @@ class CalendarRow extends React.Component {
         });
     }
     render() {
-        var cols = this.props.values.map((e, i) => <td key={i}>{e}</td>);
+        var cols = this.props.values.map((e, i) => {
+            if (i === 1 && e.length > 20) {
+                e = e.substr(0, 20) + "…";
+            }
+            return <td className={i > 3 ? "text-nowrap" : ""} key={i}>{e}</td>;
+        });
         cols.push([
             <td><ReactRouter.Link to="show" params={{id: this.props.id}}>Show</ReactRouter.Link></td>,
             <td><ReactRouter.Link to="edit" params={{id: this.props.id}}>Edit</ReactRouter.Link></td>,
