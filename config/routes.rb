@@ -7,6 +7,8 @@ Rails.application.routes.draw do
   # You can have the root of your site routed with "root"
   root 'root#index'
   get  '/event/:eid' => 'root#show'
+  get  '/calendars'  => 'root#calendars'
+  get  '/about'      => 'root#about'
 
   namespace :admin do
     root 'root#index'

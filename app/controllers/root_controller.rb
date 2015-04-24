@@ -31,4 +31,16 @@ class RootController < ApplicationController
       end
     end
   end
+
+  def calendars
+    calendars = Calendar.order(:unitname_kana)
+    @json = Jbuilder.encode do |json|
+      json.calendars(calendars) do |calendar|
+        json.extract! calendar, :cid, :unitname, :summary
+      end
+    end
+  end
+
+  def about
+  end
 end
