@@ -13,9 +13,6 @@
  *= require_tree .
  *= require_self
  */
-.navbar {
-    margin-bottom: 0;
-}
 footer {
     text-align: right;
     background-color: #f5f5f5;
