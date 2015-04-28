@@ -38,7 +38,7 @@ class RootController < ApplicationController
   end
 
   def calendars
-    calendars = Calendar.order(:unitname_kana)
+    calendars = Calendar.order('unitname_kana COLLATE "C"')
     @json = Jbuilder.encode do |json|
       json.calendars(calendars) do |calendar|
         json.extract! calendar, :cid, :unitname, :summary
