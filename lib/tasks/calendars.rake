@@ -62,6 +62,7 @@ namespace :calendars do
             result.data.items.to_a.each do |e|
               logger.info(e.to_hash)
               event = Event.create_or_update(e.to_hash, calendar)
+              event.touch
               logger.info(event)
             end
           else

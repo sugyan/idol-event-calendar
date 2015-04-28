@@ -1,7 +1,9 @@
 # coding: utf-8
 class RootController < ApplicationController
   def index
-    events = Event.eager_load(:calendar).where('start >= ?', Date.today).order(:start)
+    events = Event.eager_load(:calendar)
+             .where('start >= ? AND events.updated_at >= ?', Date.today, DateTime.now - 1)
+             .order(:start)
              .page(params.permit(:page).fetch(:page, 1).to_i).per(50)
     @json = Jbuilder.encode do |json|
       json.events(events) do |event|
@@ -38,7 +40,9 @@ class RootController < ApplicationController
   end
 
   def calendars
-    calendars = Calendar.order('unitname_kana COLLATE "C"')
+    calendars = Calendar
+                .where('updated_at >= ?', DateTime.now - 1)
+                .order('unitname_kana COLLATE "C"')
     @json = Jbuilder.encode do |json|
       json.calendars(calendars) do |calendar|
         json.extract! calendar, :cid, :unitname, :summary
