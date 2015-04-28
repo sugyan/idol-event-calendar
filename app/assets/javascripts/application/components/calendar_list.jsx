@@ -12,7 +12,7 @@ class CalendarListElement extends React.Component {
     render() {
         return (
             <li>
-              {this.props.unitname} (<a href={"https://calendar.google.com/embed?src=" + this.props.cid} target="_blank">{this.props.summary}</a>)
+                {this.props.unitname} (<a href={"https://calendar.google.com/embed?src=" + this.props.cid} target="_blank">{this.props.summary}</a>)
             </li>
         );
     }
