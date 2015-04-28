@@ -1,7 +1,8 @@
 # coding: utf-8
 class RootController < ApplicationController
   def index
-    events = Event.eager_load(:calendar).where('start >= ?', Date.today).order(:start).page(1).per(50)
+    events = Event.eager_load(:calendar).where('start >= ?', Date.today).order(:start)
+             .page(params.permit(:page).fetch(:page, 1).to_i).per(50)
     @json = Jbuilder.encode do |json|
       json.events(events) do |event|
         json.extract! event, :id, :eid, :summary, :location
@@ -13,6 +14,10 @@ class RootController < ApplicationController
         json.calendar do
           json.unitname event.calendar.unitname
         end
+      end
+      json.pager do
+        json.prev_page view_context.root_path(:page => events.prev_page) if events.prev_page
+        json.next_page view_context.root_path(:page => events.next_page) if events.next_page
       end
     end
   end

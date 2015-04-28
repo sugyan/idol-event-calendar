@@ -1,14 +1,24 @@
 class EventList extends React.Component {
+    static get propTypes() {
+        return {
+            events: React.PropTypes.array.isRequired
+        };
+    }
     render() {
-        var events = this.props.events.map((e) => <EventListItem key={e.id} {...e}/>);
+        var events = this.props.events.map(e => <EventListItem key={e.id} {...e}/>);
         return <ul className="list-unstyled">{events}</ul>;
     }
 }
-EventList.propTypes = {
-    events: React.PropTypes.array.isRequired
-};
 
 class EventListItem extends React.Component {
+    static get propTypes() {
+        return {
+            calendar: React.PropTypes.object.isRequired,
+            start: React.PropTypes.string.isRequired,
+            summary: React.PropTypes.string.isRequired,
+            location: React.PropTypes.string
+        };
+    }
     render() {
         return (
             <li style={{padding:"0.15em 0"}}>
@@ -20,9 +30,3 @@ class EventListItem extends React.Component {
         );
     }
 }
-EventListItem.propTypes = {
-    calendar: React.PropTypes.object.isRequired,
-    start: React.PropTypes.string.isRequired,
-    summary: React.PropTypes.string.isRequired,
-    location: React.PropTypes.string
-};
