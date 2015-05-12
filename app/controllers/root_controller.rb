@@ -24,6 +24,13 @@ class RootController < ApplicationController
     end
   end
 
+  def events
+    @events = Event.eager_load(:calendar)
+              .where('start >= ? AND events.updated_at >= ?', Date.today, DateTime.now - 1)
+              .order(:start)
+              .page(params.permit(:page).fetch(:page, 1).to_i).per(100)
+  end
+
   def show
     event = Event.find_by eid: params[:eid]
     @json = Jbuilder.encode do |json|

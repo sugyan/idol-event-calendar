@@ -6,6 +6,7 @@ Rails.application.routes.draw do
 
   # You can have the root of your site routed with "root"
   root 'root#index'
+  get  '/events.json' => 'root#events'
   get  '/event/:eid' => 'root#show'
   get  '/calendars'  => 'root#calendars'
   get  '/about'      => 'root#about'
